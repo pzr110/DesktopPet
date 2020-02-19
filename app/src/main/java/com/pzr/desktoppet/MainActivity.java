@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.SyncStateContract;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 //import com.lljjcoder.style.citylist.Toast.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -62,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListenerNew() {
-/**
- * 下拉刷新
- */
+       /**
+        * 下拉刷新
+        */
         mSwipeRefreshLayout.setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
             @Override
             public void onRefresh() {
@@ -92,6 +95,19 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(enable ? "松开刷新" : "下拉刷新");
                 imageView.setVisibility(View.VISIBLE);
                 imageView.setRotation(enable ? 180 : 0);
+            }
+        });
+
+        /**
+         *  点击事件
+         */
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                PetsBean petsBean = mAdapter.getData().get(position);
+                Intent intent = new Intent(MainActivity.this, PetDetailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
     }

@@ -4,8 +4,11 @@
 package com.pzr.desktoppet;
 
 
-public class PetsBean {
+import java.io.Serializable;
 
+public class PetsBean implements Serializable {
+
+    private static final long serialVersionUID = -4782179800383825169L;
     private int id;
     private String name;
     private String image;
